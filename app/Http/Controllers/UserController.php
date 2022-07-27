@@ -199,10 +199,8 @@ class UserController extends ApiController
                 ->orderBy('created_at', 'DESC')
                 ->first();
 
-            if ($oldPasswordReset) {
-                if ($oldPasswordReset->created_at > Carbon::now()->subHour()) {
-                    return $this->sendError('User already requested a password reset code in the last hour!', [], Response::HTTP_NOT_ACCEPTABLE);
-                }
+            if ($oldPasswordReset && $oldPasswordReset->created_at > Carbon::now()->subHour()) {
+                return $this->sendError('User already requested a password reset code in the last hour!', [], Response::HTTP_NOT_ACCEPTABLE);
             }
 
             DB::beginTransaction();

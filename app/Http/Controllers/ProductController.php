@@ -88,6 +88,8 @@ class ProductController extends ApiController
                 return $this->sendError('Bad request!', $validator->messages()->toArray());
             }
 
+            DB::beginTransaction();
+
             $image = null;
 
             if ($request->has('image')) {
@@ -108,6 +110,8 @@ class ProductController extends ApiController
             $product->image = $image;
             $product->status = $request->get('status', Product::INACTIVE);
             $product->save();
+
+            DB::commit();
 
             return $this->sendResponse($product->toArray(), Response::HTTP_CREATED);
         } catch (Exception $exception) {
@@ -167,6 +171,8 @@ class ProductController extends ApiController
                 return $this->sendError('Bad request!', $validator->messages()->toArray());
             }
 
+            DB::beginTransaction();
+
             $product->update([
                 'name' => $request->get('name'),
                 'category_id' => $request->get('category_id'),
@@ -175,6 +181,8 @@ class ProductController extends ApiController
                 'price' => $request->get('price'),
                 'status' => $request->get('status', Product::INACTIVE)
             ]);
+
+            DB::commit();
 
             return $this->sendResponse($product->toArray());
         } catch (Exception $exception) {
