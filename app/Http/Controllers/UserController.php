@@ -201,7 +201,7 @@ class UserController extends ApiController
 
             if ($oldPasswordReset) {
                 if ($oldPasswordReset->created_at > Carbon::now()->subHour()) {
-                    return $this->sendError('User already requested a password reset code until last hour!', [], Response::HTTP_NOT_ACCEPTABLE);
+                    return $this->sendError('User already requested a password reset code in the last hour!', [], Response::HTTP_NOT_ACCEPTABLE);
                 }
             }
 
