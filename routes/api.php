@@ -3,7 +3,6 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/register', [UserController::class, 'register']);
+
 Route::post('/verify-email', [UserController::class, 'verifyEmail']);
 Route::post('/resend-verify-email', [UserController::class, 'resendVerifyEmail']);
 Route::post('/forgot-password', [UserController::class, 'forgotPassword']);
@@ -35,10 +35,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('/category/{id}', [CategoryController::class, 'delete']);
     Route::get('categories-tree', [CategoryController::class, 'tree']);
 
+    Route::get('/product/{id}', [ProductController::class, 'get']);
+    
     Route::get('/products', [ProductController::class, 'getAll']);
     Route::get('/products/{categoryId}', [ProductController::class, 'getAllProductsForCategory']);
     Route::post('/product', [ProductController::class, 'add']);
-    Route::get('/product/{id}', [ProductController::class, 'get']);
     Route::put('/product/{id}', [ProductController::class, 'update']);
     Route::post('/product/{id}/image', [ProductController::class, 'updateImage']);
     Route::delete('/product/{id}', [ProductController::class, 'delete']);
