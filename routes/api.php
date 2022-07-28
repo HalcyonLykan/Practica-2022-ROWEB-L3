@@ -26,7 +26,7 @@ Route::post('/change-password', [UserController::class, 'changePassword']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/user', [UserController::class, 'getUser']);
-    Route::post('/user', [UserController::class, 'updateUser']);
+    Route::post('/user', [UserController::class, 'updateProfile']);
 
     Route::get('/categories', [CategoryController::class, 'getAll']);
     Route::post('/category', [CategoryController::class, 'add']);
