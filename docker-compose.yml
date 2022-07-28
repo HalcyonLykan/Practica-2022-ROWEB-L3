@@ -32,12 +32,5 @@ services:
       - "3306:3306"
     volumes:
       - data_mysql:/var/lib/mysql
-  practica-mailhog:
-    container_name: "practica-mailhog"
-    image: 'mailhog/mailhog:latest'
-    restart: unless-stopped
-    ports:
-        - '1025:1025'
-        - '8025:8025'
 volumes:
   data_mysql:
